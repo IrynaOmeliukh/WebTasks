@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/styles.css" type="text/css">
+<script src="https://code.jquery.com/jquery-2.2.4.js"
+    integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+    crossorigin="anonymous">
+  </script>
+</head>
+  <body>
+    <header>
+      <div id="container">
+        <input type="checkbox" id="toggle">
+        <nav>
+          <label class="navbar-toggler" for="toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </label>
+          <ul class="nav-list">
+            <li><a href="index.html">Main</a></li>
+            <li>
+              <a href="#">Matches</a>
+                <ul class="nav-sublist">
+                  <li><a href="#">Link 1</a></li>
+                  <li><a href="#">Link 2</a></li>
+                </ul>
+            </li>
+            <li><a href="#">News</a></li>
+            <li><a href="fans.html">Fans</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="admin.html">Admin</a></li>
+          </ul>
+          <img src="images/logo.png" alt="logo" class="logo">
+        </nav>
+      </div>
+    </header>
+    <main style="padding-top: 100px;">
+      <div><h1 class="fan-appeal">Fan appeal</h1></div>
+      <article id="article1" class="fan-text"></article>
+
+      <section class="addImage">
+        <div style="max-width: 50%;">
+            <input type="text" id="name" name="fname" placeholder="Name" rows="15" cols="95"><br><br>
+            <textarea id="fans_input" rows="15" cols="95" placeholder="Appeal"></textarea>
+        </div>
+        <div><input id="btn" class="button" type="submit" value="Add news"></div>
+      </section>
+    </main>
+    <footer>
+      @Iryna Omeliukh 2022
+      <p style="margin: 2px;padding:2px"><a href="mailto:iryna.omeliukh@gmail.com">iryna.omeliukh@gmail.com</a></p>
+    </footer>
+  </body>
+
+  <script>
+    $(function(){
+      $("#btn").click(function () {
+        let appealtxt = $("#fans_input").val();
+        let name = $("#name").val();
+        if (!(appealtxt.trim())){
+          alert("input valid data")
+          $("#fans_input").addClass("redBorder")
+        }
+        else {
+          $("#fans_input").removeClass("redBorder")
+          let currentTime = new Date($.now())
+          let formattedTime = currentTime.getHours() + ":" + currentTime.getMinutes() + ":" + currentTime.getSeconds()
+          let appeal = `<section>
+            <p>${appealtxt}</p>
+            <br>
+            <div style="display: flex; justify-content: space-around">
+            <span>Time: ${formattedTime}</span>
+            <span>Name: ${name}</span>
+            </div>
+            <hr style="margin: 0 5%;">`
+          $("#article1").prepend(appeal)
+          $("#fans_input").val('')
+          $("#name").val('')
+        }
+      });
+    })
+  </script>
+</html>

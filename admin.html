@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/styles.css" type="text/css">
+  <script src="https://code.jquery.com/jquery-2.2.4.js"
+    integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+    crossorigin="anonymous">
+  </script>
+</head>
+  <body>
+    <header>
+      <div id="container">
+        <input type="checkbox" id="toggle">
+        <nav>
+          <label class="navbar-toggler" for="toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </label>
+          <ul class="nav-list">
+            <li><a href="index.html">Main</a></li>
+            <li>
+              <a href="#">Matches</a>
+                <ul class="nav-sublist">
+                  <li><a href="#">Link 1</a></li>
+                  <li><a href="#">Link 2</a></li>
+                </ul>
+            </li>
+            <li><a href="#">News</a></li>
+            <li><a href="fans.html">Fans</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="admin.html">Admin</a></li>
+          </ul>
+          <img src="images/logo.png" class="logo">
+        </nav>
+      </div>
+    </header>
+    <main style="padding-top: 100px;">
+
+      <!-- <h3 style="padding-top: 100px;">Add news</h3> -->
+      <div class="text-wave">
+        <span style="--i:1">A</span>
+        <span style="--i:2">d</span>
+        <span style="--i:3">d</span>
+        <span style="--i:4">&nbsp</span>
+        <span style="--i:5">n</span>
+        <span style="--i:6">e</span>
+        <span style="--i:7">w</span>
+        <span style="--i:8">s</span>
+      </div>
+      <section class="addImage">
+        <div class="adminimg">
+          <input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" style="display: none;">
+          <p><img id="output" width="600" height="400"/></p>
+        </div>
+        <div><label class="button" for="file" style="cursor: pointer;">Upload Image</label></div>
+        <!-- <input type="file" name="filename" accept="image/gif, image/jpeg, image/png"> -->
+      </section>
+
+      <section class="addImage">
+        <div style="max-width: 50%;">
+            <input type="text" id="fname" name="fname" placeholder="News title" rows="15" cols="95"><br><br>
+            <textarea id="w3review" name="w3review" rows="15" cols="95" placeholder="News text"></textarea>
+        </div>
+        <div><input class="button" type="submit" value="Add news"></div>
+      </section>
+
+    </main>
+
+    <footer>
+      @Iryna Omeliukh 2022
+      <p style="margin: 2px;padding:2px"><a href="mailto:iryna.omeliukh@gmail.com">iryna.omeliukh@gmail.com</a></p>
+    </footer>
+    <script>
+      let loadFile = function(event) {
+        let image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+      };
+    </script>
+  </body>
+</html>
