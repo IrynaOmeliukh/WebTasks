@@ -27,7 +27,7 @@
                   <li><a href="#">Link 2</a></li>
                 </ul>
             </li>
-            <li><a href="#">News</a></li>
+            <li><a href="news.html">News</a></li>
             <li><a href="fans.html">Fans</a></li>
             <li><a href="#">Contact</a></li>
             <li><a href="admin.html">Admin</a></li>
@@ -56,6 +56,9 @@
 
   <script>
     $(function(){
+      function isOnline() {
+        return window.navigator.onLine;
+      }
       $("#btn").click(function () {
         let appealtxt = $("#fans_input").val();
         let name = $("#name").val();
@@ -75,7 +78,13 @@
             <span>Name: ${name}</span>
             </div>
             <hr style="margin: 0 5%;">`
-          $("#article1").prepend(appeal)
+            if (isOnline()){
+              $("#article1").prepend(appeal)
+            }
+            else{
+              localStorage.setItem('appeal', appeal);
+              // localStorage.setItem('text', news_text);
+            }
           $("#fans_input").val('')
           $("#name").val('')
         }

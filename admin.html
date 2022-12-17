@@ -27,7 +27,7 @@
                   <li><a href="#">Link 2</a></li>
                 </ul>
             </li>
-            <li><a href="#">News</a></li>
+            <li><a href="news.html">News</a></li>
             <li><a href="fans.html">Fans</a></li>
             <li><a href="#">Contact</a></li>
             <li><a href="admin.html">Admin</a></li>
@@ -50,22 +50,27 @@
         <span style="--i:8">s</span>
       </div>
       <section class="addImage">
+        <div class="div1" style="max-width: 50%;">
+          <div id="display-image"></div>
+        </div>
+        <div>
+          <input type="file" id="image-input" accept="image/jpeg, image/png, image/jpg">
+        </div>
+<!--
         <div class="adminimg">
           <input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" style="display: none;">
           <p><img id="output" width="600" height="400"/></p>
-        </div>
+        </div> -->
         <div><label class="button" for="file" style="cursor: pointer;">Upload Image</label></div>
         <!-- <input type="file" name="filename" accept="image/gif, image/jpeg, image/png"> -->
       </section>
-
       <section class="addImage">
         <div style="max-width: 50%;">
-            <input type="text" id="fname" name="fname" placeholder="News title" rows="15" cols="95"><br><br>
-            <textarea id="w3review" name="w3review" rows="15" cols="95" placeholder="News text"></textarea>
+            <input id="news_title" type="text" placeholder="News title" rows="15" cols="95"><br><br>
+            <textarea id="news_text" rows="15" cols="95" placeholder="News text"></textarea>
         </div>
-        <div><input class="button" type="submit" value="Add news"></div>
+        <div><input id="btn" class="button" type="submit" value="Add news"></div>
       </section>
-
     </main>
 
     <footer>
@@ -73,10 +78,69 @@
       <p style="margin: 2px;padding:2px"><a href="mailto:iryna.omeliukh@gmail.com">iryna.omeliukh@gmail.com</a></p>
     </footer>
     <script>
+      const image = document.getElementById('output');
+
       let loadFile = function(event) {
-        let image = document.getElementById('output');
         image.src = URL.createObjectURL(event.target.files[0]);
       };
-    </script>
+
+      // const image1 = document.getElementById('output');
+
+
+      // image1.addEventListener('change', function() {
+      //   // const image1 = event.target.files[0];
+      //   alert('j')
+      //   const reader = new FileReader();
+      //   reader.readAsDataURL(image1);
+      //   reader.addEventListener('load', () => {
+      //     localStorage.setItem('thumbnail', reader.result);
+      //   });
+      // });
+
+
+      function isOnline() {
+        return window.navigator.onLine;
+      }
+
+      $(function(){
+        $("#btn").click(function () {
+          let news_text = $("#news_text").val();
+          let news_title = $("#news_title").val();
+          if (!(news_text.trim() && news_title.trim() && image.src)){
+            alert("input valid data")
+            $("#news_text").addClass("redBorder")
+          }
+          else if (isOnline()){
+            $("#news_text").removeClass("redBorder")
+            $("#news_text").val('')
+            $("#news_title").val('')
+            alert("saved successfully!")
+          }
+          else {
+            localStorage.setItem('title', news_title);
+            localStorage.setItem('text', news_text);
+            // const btn = document.querySelector('#btn')
+            // btn.addEventListener('click', (event) => {
+              //   const image1 = event.target.files[0];
+              //   const reader = new FileReader();
+              //   reader.readAsDataURL(image1);
+              //   reader.addEventListener('load', () => {
+                //     localStorage.setItem('thumbnail', reader.result);
+                //   });
+                // });
+            const image_input = document.querySelector("#image-input");
+            image_input.addEventListener("change", function () {
+              const reader = new FileReader();
+              reader.addEventListener("load", () => {
+                const uploaded_image = reader.result;
+                localStorage.setItem("recent_image" , uploaded_image)
+                document.querySelector("#display-image").style.backgroundImage = `url(${uploaded_image})`;
+              });
+              reader.readAsDataURL(this.files[0]);
+            });
+          }
+        });
+      })
+      </script>
   </body>
-</html>
+  </html>
