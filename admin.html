@@ -49,21 +49,15 @@
         <span style="--i:7">w</span>
         <span style="--i:8">s</span>
       </div>
+
       <section class="addImage">
-        <div class="div1" style="max-width: 50%;">
-          <div id="display-image"></div>
-        </div>
         <div>
-          <input type="file" id="image-input" accept="image/jpeg, image/png, image/jpg">
-        </div>
-<!--
-        <div class="adminimg">
-          <input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" style="display: none;">
+          <input type="file" accept="image/jpeg, image/png, image/jpg" name="image" id="image-input" onchange="loadFile(event)" style="display: none;">
           <p><img id="output" width="600" height="400"/></p>
-        </div> -->
-        <div><label class="button" for="file" style="cursor: pointer;">Upload Image</label></div>
-        <!-- <input type="file" name="filename" accept="image/gif, image/jpeg, image/png"> -->
+        </div>
+        <div><label class="button" for="image-input" style="cursor: pointer;">Upload Image</label></div>
       </section>
+
       <section class="addImage">
         <div style="max-width: 50%;">
             <input id="news_title" type="text" placeholder="News title" rows="15" cols="95"><br><br>
@@ -84,20 +78,6 @@
         image.src = URL.createObjectURL(event.target.files[0]);
       };
 
-      // const image1 = document.getElementById('output');
-
-
-      // image1.addEventListener('change', function() {
-      //   // const image1 = event.target.files[0];
-      //   alert('j')
-      //   const reader = new FileReader();
-      //   reader.readAsDataURL(image1);
-      //   reader.addEventListener('load', () => {
-      //     localStorage.setItem('thumbnail', reader.result);
-      //   });
-      // });
-
-
       function isOnline() {
         return window.navigator.onLine;
       }
@@ -106,6 +86,7 @@
         $("#btn").click(function () {
           let news_text = $("#news_text").val();
           let news_title = $("#news_title").val();
+
           if (!(news_text.trim() && news_title.trim() && image.src)){
             alert("input valid data")
             $("#news_text").addClass("redBorder")
@@ -119,28 +100,84 @@
           else {
             localStorage.setItem('title', news_title);
             localStorage.setItem('text', news_text);
-            // const btn = document.querySelector('#btn')
-            // btn.addEventListener('click', (event) => {
-              //   const image1 = event.target.files[0];
-              //   const reader = new FileReader();
-              //   reader.readAsDataURL(image1);
-              //   reader.addEventListener('load', () => {
-                //     localStorage.setItem('thumbnail', reader.result);
-                //   });
-                // });
-            const image_input = document.querySelector("#image-input");
-            image_input.addEventListener("change", function () {
-              const reader = new FileReader();
-              reader.addEventListener("load", () => {
-                const uploaded_image = reader.result;
-                localStorage.setItem("recent_image" , uploaded_image)
-                document.querySelector("#display-image").style.backgroundImage = `url(${uploaded_image})`;
-              });
-              reader.readAsDataURL(this.files[0]);
-            });
           }
         });
       })
-      </script>
+
+      const image_input = document.querySelector("#image-input");
+      image_input.addEventListener("change", function () {
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+          const uploaded_image = reader.result;
+          localStorage.setItem("recent_image" , uploaded_image)
+        });
+        reader.readAsDataURL(this.files[0]);
+      });
+      // const btn1 = document.getElementById('btn');
+      // const adminsMessage = document.getElementById('news_text');
+      // const title = document.getElementById('news_title');
+
+      // btn1.addEventListener('click', addElement);
+
+      // function addElement() {
+      //   const parentElement = document.getElementById('news_text');
+      //   const date = new Date(Date.now()).toLocaleString().split('/').join('.')
+      //   const newContent = adminsMessage.value
+      //   const newTitle = title.value
+      //   const newImg = document.getElementById('image-input');
+
+      //   function titleValidation() {
+      //     title.placeholder = "Please enter title";
+      //     title.style.borderColor = "red";
+      //   }
+      //   function messageValidation() {
+      //     adminsMessage.style.borderColor = "red";
+      //     adminsMessage.placeholder = "Please enter your message";
+      //   }
+      //   if (((title.value).trim() == '') && ((adminsMessage.value).trim() == '')) {
+      //     titleValidation();
+      //     messageValidation();
+      //     return false;
+      //   }
+
+      //   if ((title.value).trim() == '') {
+      //     titleValidation();
+      //     return false;
+      //   }
+
+      //   if ((adminsMessage.value).trim() == '') {
+      //     messageValidation();
+      //     return false;
+      //   }
+
+      //   function isOnline() {
+      //     return window.navigator.onLine;
+      //   }
+
+      //   if (isOnline()) {
+      //     alert('sendind data to server');
+      //   } else {
+      //     localStorage.setItem('title', newTitle);
+      //     localStorage.setItem('content', newContent);
+      //   }
+
+      //   parentElement.insertAdjacentHTML('afterbegin',
+      //     `<article>
+      //       <p>${newTitle}</p>
+      //       <p>${newContent}</p>
+      //       <p>${date}</p>
+      //       <hr style="margin: 0 50px;">
+      //     </article>`)
+
+      //   title.value = "";
+      //   adminsMessage.value = "";
+      //   alert("Post successfully added");
+      //   title.style.borderColor = "black";
+      //   adminsMessage.style.borderColor = "black";
+      // }
+
+
+
+    </script>
   </body>
-  </html>
+</html>

@@ -88,20 +88,27 @@
       <p style="margin: 2px;padding:2px"><a href="mailto:iryna.omeliukh@gmail.com">iryna.omeliukh@gmail.com</a></p>
     </footer>
     <script>
+      function isOnline() {
+        return window.navigator.onLine;
+      }
+
       $(function(){
-        let news_title = localStorage.getItem('title')
-        let news_text = localStorage.getItem('text')
-        let new_card = `<div class="card">
-          <img src="https://www.w3schools.com/howto/img_avatar.png" style="width:100%">
-          <div class="card-container">
-            <h4><b>${news_title}</b></h4>
-            <p>${news_text}</p>
-          </div>
-        </div>`
-        $(".cards_with_news").prepend(new_card)
-        localStorage.clear()
-        // localStorage.removeItem('title')
-        // localStorage.removeItem('text')
+        if (isOnline() && 'title' in localStorage && 'text' in localStorage){
+          let news_title = localStorage.getItem('title')
+          let news_text = localStorage.getItem('text')
+          let image = localStorage.getItem('recent_image')
+          let new_card = `<div class="card">
+            <img src=${image} style="width:100%">
+            <div class="card-container">
+              <h4><b>${news_title}</b></h4>
+              <p>${news_text}</p>
+            </div>
+          </div>`
+          $(".cards_with_news").prepend(new_card)
+          localStorage.clear()
+          // localStorage.removeItem('title')
+          // localStorage.removeItem('text')
+        }
       })
     </script>
   </body>
